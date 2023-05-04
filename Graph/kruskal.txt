@@ -1,0 +1,42 @@
+vector<int> par;
+vector<int> Size;
+void make_Set(int v)
+{
+    par[v] = v;
+    Size[v] = 1;
+}
+int find_Set(int v)
+{
+    return par[v] = (par[v] == v) ? v : find_Set(par[v]);
+}
+void union_Set(int u, int v)
+{
+    if(Size[u]<Size[v]) swap(u,v);
+    par[v] = u;
+    Size[u] += Size[v];
+}
+bool cmp(vector<int>&a,vector<int>&b)
+{ 
+    return a[0]<a[1];
+}
+// taking index as 0
+int Kruskal(int n,vector<vector<int>>&adj)
+{
+    // adj contains value as :- vec(wt,u,v)
+    par.resize(n);
+    Size.resize(n);
+    for(int i=0;i<n;i++) make_Set(i);
+    sort(adj.begin(),adj.end(),cmp);
+    int mstVal = 0;
+    for(auto i:adj)
+    {
+        int a = find_Set(i[1]);
+        int b = find_Set(i[2]);
+        if(a!=b)
+        {
+            union_Set(a,b);
+            mstVal += i[0];
+        }
+    }
+    return mstVal;
+}

@@ -1,6 +1,6 @@
 #define pipii pair<int,pair<int,int>>
 vector<pair<int,int>>mst;
-int minSpanTree(vector<vector<pair<int,int>>>adj,int n)
+int PrimsAlgorithm(vector<vector<pair<int,int>>>&adj,int n)
 {
     vector<bool>vis(n,0);
     priority_queue<pipii,vector<pipii>,greater<pipii>>pq;
