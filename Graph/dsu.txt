@@ -1,0 +1,20 @@
+vector<int> par;
+vector<int> Size;
+void make_Set(int v)
+{
+    par[v] = v;
+    Size[v] = 1;
+}
+int find_Set(int v)
+{
+    return par[v] = (par[v] == v) ? v : find_Set(par[v]);
+}
+void union_Set(int u, int v)
+{
+    u = find_Set(u);
+    v = find_Set(v);
+    if (u != v){
+        if(Size[u]<Size[v]) swap(u,v);
+        par[v] = u;
+        Size[u] += Size[v];}
+}

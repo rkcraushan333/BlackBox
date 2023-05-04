@@ -1,0 +1,7 @@
+void dfs(int s){
+    vis[s] = 1;
+    for(auto i:adj[s])
+    {
+        if(!vis[i]) dfs(i);
+    }
+}
