@@ -1,0 +1,2 @@
+Prefix function --> Knuth Morris Pratt's algorithm
+Take the help of cp algorithm and abdul bari sir yt
