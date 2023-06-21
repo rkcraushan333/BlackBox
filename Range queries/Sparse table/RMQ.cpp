@@ -1,3 +1,4 @@
+// RMQ and similar (idemopotent queries like:-or,and,max,etc)
 vector<vector<int>> table;
 void buildTable(v64 &v, int n, int k)
 {
