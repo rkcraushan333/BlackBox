@@ -23,5 +23,5 @@ int PrimsAlgorithm(vector<vector<pair<int,int>>>&adj,int n)
             vis[node] = 1;
         }
     }
-    rerturn mstVal;
+    return mstVal;
 }
