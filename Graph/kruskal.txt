@@ -15,10 +15,6 @@ void union_Set(int u, int v)
     par[v] = u;
     Size[u] += Size[v];
 }
-bool cmp(vector<int>&a,vector<int>&b)
-{ 
-    return a[0]<a[1];
-}
 // taking index as 0
 int Kruskal(int n,vector<vector<int>>&adj)
 {
@@ -26,7 +22,7 @@ int Kruskal(int n,vector<vector<int>>&adj)
     par.resize(n);
     Size.resize(n);
     for(int i=0;i<n;i++) make_Set(i);
-    sort(adj.begin(),adj.end(),cmp);
+    sort(adj.begin(),adj.end());
     int mstVal = 0;
     for(auto i:adj)
     {
