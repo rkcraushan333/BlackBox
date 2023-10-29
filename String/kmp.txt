@@ -1,2 +1,61 @@
-Prefix function --> Knuth Morris Pratt's algorithm
-Take the help of cp algorithm and abdul bari sir yt
+int kmpPatternMatching(string &str, string &pattern)
+{
+    int n = str.size(), m = pattern.size();
+    // finding prefix and suffix of pattern
+    vector<int> v(m);
+    int i = 0, j = 1;
+    while (j < m)
+    {
+        if (p[i] == p[j])
+        {
+            v[j] = i + 1;
+            i++;
+            j++;
+        }
+        else
+        {
+            while (i > 0 && (p[i] != p[j]))
+            {
+                i--;
+                i = v[i];
+            }
+            if (p[i] != p[j])
+            {
+                j++;
+            }
+        }
+    }
+    int ans = 0;
+    i = 0;
+    j = 0;
+    while (i < n)
+    {
+        if (s[i] == p[j])
+        {
+            i++;
+            j++;
+        }
+        else
+        {
+            while (j > 0 && (s[i] != p[j]))
+            {
+                j--;
+                j = v[j];
+            }
+            if (s[i] != p[j])
+            {
+                i++;
+            }
+        }
+        if (j == m)
+        {
+            ans++;
+            while (j > 0 && (s[i] != p[j]))
+            {
+                j--;
+                j = v[j];
+            }
+        }
+    }
+    return ans;
+}
