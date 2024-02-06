@@ -1,0 +1,41 @@
+#define ll long long
+    ll p = 31;
+    const int mod = 1e9+7;
+    vector<ll>pre;
+    ll hashfun(string &s)
+    {
+        ll pw = 1,val=0;
+        for(char c:s)
+        {
+            int a = (c-'a')+1;
+            val += a*pw; val  %= mod;
+            pw *= p; pw %= mod;
+            pre.push_back(val);
+        }
+        return val;
+    }
+    ll fastpw(ll a,ll b)
+    {
+        if(b==0) return 1;
+        ll val = fastpw(a,b/2);
+        ll x = (val*val)%mod;
+        if(b&1)
+        {
+            return (x*a)%mod;
+        }
+        else
+        {
+            return x;
+        }
+    }
+    ll revMod(ll x)
+    {
+        return fastpw(x,mod-2);
+    }
+
+/*
+to check 
+ll a = pre[n-i-1];
+ll b = ((pre[n-1]-pre[i-1]+mod)*revMod(fastpw(p,i)))%mod;
+if(a==b) ans = i/k;
+*/
