@@ -1,61 +1,56 @@
-int kmpPatternMatching(string &str, string &pattern)
-{
-    int n = str.size(), m = pattern.size();
-    // finding prefix and suffix of pattern
-    vector<int> v(m);
-    int i = 0, j = 1;
-    while (j < m)
+// KMP Algorithm
+    vector<int>prefGen(string pattern)
     {
-        if (pattern[i] == pattern[j])
+        int n = pattern.size();
+        vector<int>v(n);
+        int i=0,j=1;
+        while(j<pattern.size())
         {
-            v[j] = i + 1;
-            i++;
-            j++;
-        }
-        else
-        {
-            while (i > 0 && (pattern[i] != pattern[j]))
+            if(pattern[i]==pattern[j])
             {
-                i--;
-                i = v[i];
+                v[j] = v[j-1]+1;
+                i++; j++;
             }
-            if (pattern[i] != pattern[j])
+            else
             {
+                while(i>0&&(pattern[i]!=pattern[j]))
+                {
+                    i = v[i-1];
+                }
+                if(pattern[i]==pattern[j])
+                {
+                    v[j] = i+1;
+                    i++;
+                }
                 j++;
             }
         }
+        return v;
     }
-    int ans = 0;
-    i = 0;
-    j = 0;
-    while (i < n)
+
+    int kmp(string str,string pattern)
     {
-        if (str[i] == pattern[j])
+        int n = str.size(),m = pattern.size();
+        vector<int>pre = prefGen(pattern);
+        int i=0,j=0;
+        while(i<str.size()&&j<pattern.size())
         {
-            i++;
-            j++;
-        }
-        else
-        {
-            while (j > 0 && (str[i] != pattern[j]))
+            if(str[i]==pattern[j])
             {
-                j--;
-                j = v[j];
+                i++; j++;
             }
-            if (str[i] != pattern[j])
+            else
             {
-                i++;
-            }
-        }
-        if (j == m)
-        {
-            ans++;
-            while (j > 0 && (str[i] != pattern[j]))
-            {
-                j--;
-                j = v[j];
+                if(j!=0)
+                {
+                    j = pre[j-1];
+                }
+                else
+                {
+                    i++;
+                }
             }
         }
+        if(j==pattern.size()) return i-m;
+        return -1;
     }
-    return ans;
-}
