@@ -13,16 +13,14 @@
             }
             else
             {
-                while(i>0&&(pattern[i]!=pattern[j]))
+               if(i>0&&(pattern[i]!=pattern[j]))
                 {
                     i = v[i-1];
                 }
-                if(pattern[i]==pattern[j])
+                if(pattern[i]!=pattern[j])
                 {
-                    v[j] = i+1;
-                    i++;
+                    j++;
                 }
-                j++;
             }
         }
         return v;
