@@ -5,6 +5,7 @@ int PrimsAlgorithm(vector<vector<pair<int,int>>>&adj,int n)
     vector<bool>vis(n,0);
     priority_queue<pipii,vector<pipii>,greater<pipii>>pq;
     // for 0 based index
+    pq.push({0,{0,0});
     int mstVal = 0;
     while(!pq.empty())
     {
